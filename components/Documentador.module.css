@@ -1,0 +1,38 @@
+/* Iconos azules con sombra notoria */
+.iconAzulSombra {
+  filter: drop-shadow(0 1px 1px #06122488);
+  color: #061224;
+  /*ParaSVGinline,siaplica*/fill: #061224;
+  -webkit-filter: drop-shadow(0 1px 1px #06122488);
+}
+/* Ensures each main section is wide and centered on large screens */
+.section {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.1fr;
+    justify-items: center;
+    gap: 1.5rem;
+    max-width: 650px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
