@@ -5,10 +5,12 @@ import { DOCX_MIME_TYPE } from "./constants";
 import { buildCorporateDocumentFileName } from "./file-name";
 import type { DocumentGenerationPayload, DocumentGenerationResult } from "./types";
 
+const getPlaceholderPath = () => path.join(process.cwd(), "public", "placeholder.docx");
+
 export const generateMockDocument = async (
   payload: DocumentGenerationPayload,
 ): Promise<DocumentGenerationResult> => {
-  const placeholderPath = path.join(process.cwd(), "public", "placeholder.docx");
+  const placeholderPath = getPlaceholderPath();
   const placeholderBuffer = await readFile(placeholderPath);
 
   return {
@@ -26,4 +28,13 @@ export const generateMockDocument = async (
       sourceFileName: payload.fileName,
     },
   };
+};
+
+export const mockDocumentExists = async () => {
+  try {
+    await readFile(getPlaceholderPath());
+    return true;
+  } catch {
+    return false;
+  }
 };
