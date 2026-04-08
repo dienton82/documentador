@@ -3,6 +3,16 @@
 import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { showSuccessAlert, showServerError, showNetworkError } from "@/lib/alerts";
+import {
+  DEFAULT_TEMPLATE_CODE,
+  getTemplateLabel,
+} from "@/lib/documentador/constants";
+import {
+  DocumentGenerationRequestError,
+  downloadGeneratedDocument,
+  generateDocument,
+  isXmlFile,
+} from "@/lib/documentador/service";
 const TemplateSelect = dynamic(() => import("./TemplateSelect"), { ssr: false });
 import Image from "next/image";
 import styles from "./Documentador.module.css";
@@ -20,15 +30,6 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Map template ids to human-friendly labels
-  const templateNames: Record<string, string> = {
-    CTLS_Template: "Plantilla CTLS (Por defecto)",
-    ETL_Template: "Plantilla ETL (Por defecto)",
-    Standard_Template: "Plantilla Estándar",
-    Custom_Template: "Plantilla Personalizada",
-  };
-  const templateLabel = (id: string) => (templateNames[id] ?? id);
-
   // Helpers: estados derivados y utilidades
   const hasFile = !!file;
   const hasTemplate = !!template;
@@ -45,14 +46,6 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
     updateStep(1);
   };
 
-  const buildFilename = () => {
-    const configuredName = project.trim();
-    return `TI – CQ-JiraXXX – Diseño detallado y desarrollo – ${configuredName}.docx`
-      .replace(/[\\/:*?"<>|]/g, "-")
-      .replace(/\s+/g, " ")
-      .trim();
-  };
-
   function updateStep(newStep: 1 | 2 | 3) {
     setStep(newStep);
     if (onStepChange) onStepChange(newStep);
@@ -60,7 +53,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
   function onPick(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0] || null;
     setFile(f);
-    const isValid = !!f && (f.type === "text/xml" || f.name.toLowerCase().endsWith(".xml"));
+    const isValid = isXmlFile(f);
     setValidXML(isValid);
     if (isValid) updateStep(2);
   }
@@ -69,40 +62,25 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
     e.preventDefault();
     if (!canSubmit) return;
     setLoading(true);
-    const chosenTemplate = template || "CTLS_Template";
-    try {
-      const form = new FormData();
-      form.append("xml_file", file as File, (file as File).name);
-      form.append("project_name", project.trim());
-      form.append("template_name", chosenTemplate);
+    const chosenTemplate = template || DEFAULT_TEMPLATE_CODE;
 
-      const res = await fetch("/api/documentar", {
-        method: "POST",
-        body: form,
+    try {
+      const result = await generateDocument({
+        file: file as File,
+        projectName: project.trim(),
+        templateCode: chosenTemplate,
       });
 
-      if (!res.ok) {
-        await showServerError(res.status, res.statusText);
-        return;
+      downloadGeneratedDocument(result);
+      await showSuccessAlert(result.filename);
+    } catch (error) {
+      console.error(error);
+
+      if (error instanceof DocumentGenerationRequestError) {
+        await showServerError(error.status, error.statusText);
+      } else {
+        await showNetworkError();
       }
-
-      const blob = await res.blob();
-      const filename = buildFilename();
-
-      // Crear URL temporal y descargar
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-
-      await showSuccessAlert(filename);
-    } catch (e) {
-      console.error(e);
-      await showNetworkError();
     } finally {
       setLoading(false);
       resetAll();
@@ -230,7 +208,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                 <span className={`break-all ${
                   hasFile && validXML && hasTemplate ? "text-gray-700" : "text-gray-600"
                 }`}>
-                  Plantilla seleccionada: <b>{template ? templateLabel(template) : "N/D"}</b>
+                  Plantilla seleccionada: <b>{template ? getTemplateLabel(template) : "N/D"}</b>
                 </span>
               </li>
               <li className={`flex items-start sm:items-center gap-2 transition-all duration-300 ${
