@@ -1,8 +1,5 @@
 import Swal from "sweetalert2";
 
-/**
- * Muestra un toast de éxito para descarga completada
- */
 export const showSuccessAlert = async (filename: string) => {
   return Swal.fire({
     icon: "success",
@@ -11,14 +8,11 @@ export const showSuccessAlert = async (filename: string) => {
     showConfirmButton: true,
     confirmButtonColor: "#061224",
     customClass: {
-      popup: 'shadow-2xl',
-    }
+      popup: "shadow-2xl",
+    },
   });
 };
 
-/**
- * Muestra un alert de error del servidor
- */
 export const showServerError = async (status: number, statusText: string) => {
   return Swal.fire({
     icon: "error",
@@ -27,14 +21,11 @@ export const showServerError = async (status: number, statusText: string) => {
     confirmButtonText: "Cerrar",
     confirmButtonColor: "#061224",
     customClass: {
-      popup: 'shadow-2xl',
-    }
+      popup: "shadow-2xl",
+    },
   });
 };
 
-/**
- * Muestra un alert de error de red
- */
 export const showNetworkError = async () => {
   return Swal.fire({
     icon: "error",
@@ -43,7 +34,7 @@ export const showNetworkError = async () => {
     confirmButtonText: "Cerrar",
     confirmButtonColor: "#061224",
     customClass: {
-      popup: 'shadow-2xl',
-    }
+      popup: "shadow-2xl",
+    },
   });
 };

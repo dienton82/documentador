@@ -1,21 +1,15 @@
 node_modules/
-.next/
-out/
 dist/
 coverage/
 *.log
 .env
 .env.*
-!.env.example
 *.zip
 .DS_Store
 Thumbs.db
 
 # Local editor and history artifacts
 .history/
-
-# Next.js deployment output
-.vercel/
 
 # TypeScript
 *.tsbuildinfo

@@ -3,10 +3,6 @@ import type { DocumentTemplate } from "./types";
 export const DOCX_MIME_TYPE =
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-export const DOCUMENTADOR_ROUTE = "/api/documentar";
-
-export const CORPORATE_NAMING_STRATEGY = "legacy-bdo" as const;
-
 export const DEFAULT_TEMPLATE_CODE = "ETL_Template";
 
 export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [

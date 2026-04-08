@@ -1,7 +1,4 @@
-
-"use client";
-import { useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import { lazy, Suspense, useRef, useState } from "react";
 import { showSuccessAlert, showServerError, showNetworkError } from "@/lib/alerts";
 import {
   DEFAULT_TEMPLATE_CODE,
@@ -13,9 +10,9 @@ import {
   generateDocument,
   isXmlFile,
 } from "@/lib/documentador/service";
-const TemplateSelect = dynamic(() => import("./TemplateSelect"), { ssr: false });
-import Image from "next/image";
 import styles from "./Documentador.module.css";
+
+const TemplateSelect = lazy(() => import("./TemplateSelect"));
 
 type DocumentadorProps = {
   onStepChange?: (step: number) => void;
@@ -30,7 +27,6 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Helpers: estados derivados y utilidades
   const hasFile = !!file;
   const hasTemplate = !!template;
   const hasProject = project.trim().length > 0;
@@ -50,6 +46,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
     setStep(newStep);
     if (onStepChange) onStepChange(newStep);
   }
+
   function onPick(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0] || null;
     setFile(f);
@@ -87,18 +84,16 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
     }
   }
 
-
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
-      {/* Título principal eliminado, solo secciones limpias */}
       <form onSubmit={onSubmit} className={styles.grid}>
         {step === 1 && (
           <div className={"rounded-xl bg-white/80 backdrop-blur-md p-4 sm:p-6 border border-white/40 shadow-lg " + styles.section}>
             <div className="flex flex-col h-full justify-start">
               <div className="flex flex-col items-center mb-2">
-                <Image src="/icons/cargar-archivo.png" alt="Buscar" width={48} height={48} className={`mb-2 ${styles.iconAzulSombra}`} />
+                <img src="/icons/cargar-archivo.png" alt="Buscar" width={48} height={48} className={`mb-2 ${styles.iconAzulSombra}`} />
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 text-center mb-2">Arrastre y suelte el archivo aquí o haga clic</p>
+              <p className="text-xs sm:text-sm text-gray-600 text-center mb-2">Arrasque y suelte el archivo aquí o haga clic</p>
               <div className="mt-2 flex flex-col items-center">
                 <input
                   ref={inputRef}
@@ -107,9 +102,9 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                   onChange={onPick}
                   className="hidden"
                 />
-                <button 
-                  type="button" 
-                  onClick={() => inputRef.current?.click()} 
+                <button
+                  type="button"
+                  onClick={() => inputRef.current?.click()}
                   className="w-full sm:w-auto mt-2 px-4 py-2 rounded-lg bg-[#061224] text-white hover:opacity-90 text-sm sm:text-base"
                 >
                   Cargar Archivo
@@ -122,18 +117,20 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
         {step === 2 && (
           <div className={"rounded-xl bg-white/80 backdrop-blur-md p-4 sm:p-6 border border-white/40 shadow-lg " + styles.section}>
             <label className="text-xs sm:text-sm font-medium text-gray-700">Seleccione Plantilla</label>
-            <TemplateSelect
-              value={template}
-              onChange={val => { setTemplate(val); updateStep(3); }}
-              disabled={!canSelectTemplate}
-            />
+            <Suspense fallback={<div className="mt-2 text-sm text-gray-400">Cargando...</div>}>
+              <TemplateSelect
+                value={template}
+                onChange={val => { setTemplate(val); updateStep(3); }}
+                disabled={!canSelectTemplate}
+              />
+            </Suspense>
             <p className="mt-2 text-xs text-gray-500">
               Seleccione la plantilla para generar el documento.
             </p>
             {file && (
               <p className="mt-2 text-xs sm:text-sm text-gray-600 break-all">
-                Archivo seleccionado: {" "}
-                <span className="inline-block align-middle rounded px-2 py-0.5  text-[#061224] font-semibold">
+                Archivo seleccionado:{" "}
+                <span className="inline-block align-middle rounded px-2 py-0.5 text-[#061224] font-semibold">
                   {file.name}
                 </span>
               </p>
@@ -141,9 +138,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
             <div className="mt-6 flex flex-col sm:flex-row gap-2 sm:gap-2">
               <button
                 type="button"
-                onClick={() => {
-                  resetAll();
-                }}
+                onClick={resetAll}
                 className="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 bg-white/90 backdrop-blur-sm transition-colors text-sm sm:text-base"
               >
                 Cambiar archivo
@@ -172,33 +167,33 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
             </p>
             <ul className="mt-4 space-y-2 text-xs sm:text-sm">
               <li className={`flex items-start sm:items-center gap-2 transition-all duration-300 ${
-          hasFile && validXML ? "opacity-100" : "opacity-40"
+                hasFile && validXML ? "opacity-100" : "opacity-40"
               }`}>
                 <div className="flex-shrink-0">
-                  <Image 
-                    src="/icons/aprobacion-bien.png" 
-                    alt="" 
-                    width={18} 
+                  <img
+                    src="/icons/aprobacion-bien.png"
+                    alt=""
+                    width={18}
                     height={18}
                     className={`transition-all duration-300 ${styles.iconAzulSombra} ${
-                        hasFile && validXML ? "grayscale-0" : "grayscale"
+                      hasFile && validXML ? "grayscale-0" : "grayscale"
                     }`}
                   />
                 </div>
                 <span className={`break-all ${
-                    hasFile && validXML ? "text-gray-700" : "text-gray-600"
+                  hasFile && validXML ? "text-gray-700" : "text-gray-600"
                 }`}>
-                 Archivo cargado: <b>{file?.name || "N/D"}</b>
+                  Archivo cargado: <b>{file?.name || "N/D"}</b>
                 </span>
               </li>
               <li className={`flex items-start sm:items-center gap-2 transition-all duration-300 ${
                 hasFile && validXML && hasTemplate ? "opacity-100" : "opacity-40"
               }`}>
                 <div className="flex-shrink-0">
-                  <Image 
-                    src="/icons/aprobacion-bien.png" 
-                    alt="" 
-                    width={18} 
+                  <img
+                    src="/icons/aprobacion-bien.png"
+                    alt=""
+                    width={18}
                     height={18}
                     className={`transition-all duration-300 ${styles.iconAzulSombra} ${
                       hasFile && validXML && hasTemplate ? "grayscale-0" : "grayscale"
@@ -212,21 +207,21 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                 </span>
               </li>
               <li className={`flex items-start sm:items-center gap-2 transition-all duration-300 ${
-                  hasFile && validXML && hasProject ? "opacity-100" : "opacity-40"
+                hasFile && validXML && hasProject ? "opacity-100" : "opacity-40"
               }`}>
                 <div className="flex-shrink-0">
-                  <Image 
-                    src="/icons/aprobacion-bien.png" 
-                    alt="" 
-                    width={18} 
+                  <img
+                    src="/icons/aprobacion-bien.png"
+                    alt=""
+                    width={18}
                     height={18}
                     className={`transition-all duration-300 ${styles.iconAzulSombra} ${
-                        hasFile && validXML && hasProject ? "grayscale-0" : "grayscale"
+                      hasFile && validXML && hasProject ? "grayscale-0" : "grayscale"
                     }`}
                   />
                 </div>
                 <span className={`break-all ${
-                    hasFile && validXML && hasProject ? "text-gray-700" : "text-gray-600"
+                  hasFile && validXML && hasProject ? "text-gray-700" : "text-gray-600"
                 }`}>
                   Nombre Proyecto: <b>{project || "N/D"}</b>
                 </span>
@@ -242,19 +237,14 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  // Volver a la selección de plantilla sin resetear el archivo ni la plantilla actual
-                  updateStep(2);
-                }}
+                onClick={() => updateStep(2)}
                 className="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 bg-white/90 backdrop-blur-sm transition-colors text-sm sm:text-base order-2 sm:order-2"
               >
                 Volver a Plantilla
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  resetAll();
-                }}
+                onClick={resetAll}
                 className="w-full sm:w-auto px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 bg-white/90 backdrop-blur-sm transition-colors text-sm sm:text-base order-3 sm:order-3"
                 aria-label="Cambiar archivo y volver al primer paso"
               >

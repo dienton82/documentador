@@ -1,11 +1,9 @@
-"use client";
-import HeroCopy from "@/components/Hero_copy";
-import Sidebar from "@/components/Sidebar";
+import HeroCopy from "../components/HeroCopy";
+import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 
 export default function Aceleradores() {
   const [showApp, setShowApp] = useState(false);
-  // Handler for sidebar click
   const handleSidebarClick = () => setShowApp(true);
 
   return (

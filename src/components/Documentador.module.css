@@ -2,10 +2,10 @@
 .iconAzulSombra {
   filter: drop-shadow(0 1px 1px #06122488);
   color: #061224;
-  /*ParaSVGinline,siaplica*/fill: #061224;
+  fill: #061224;
   -webkit-filter: drop-shadow(0 1px 1px #06122488);
 }
-/* Ensures each main section is wide and centered on large screens */
+
 .section {
   width: 100%;
   max-width: 700px;

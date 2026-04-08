@@ -17,8 +17,6 @@ export const buildCorporateDocumentFileName = ({
 }: BuildCorporateDocumentFileNameInput) => {
   const safeProjectName = sanitizeFileSegment(projectName);
 
-  // Preserves the current corporate naming used by the UI while keeping
-  // templateCode available for future naming strategies.
   if (corporateNaming === "legacy-bdo") {
     return `TI – CQ-JiraXXX – Diseño detallado y desarrollo – ${safeProjectName}.docx`;
   }

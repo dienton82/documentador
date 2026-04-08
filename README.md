@@ -1,53 +1,84 @@
 
-# Documentador — Next.js + TypeScript + Tailwind + CSS Modules
+# Documentador — React + Vite + TypeScript + Tailwind
+
+Aplicación frontend de demostración para portafolio. Permite cargar un archivo XML, validarlo, seleccionar una plantilla, ingresar el nombre del proyecto y descargar un documento DOCX con nombre corporativo.
+
+## Stack
+
+- **React 18** + **TypeScript**
+- **Vite** como bundler
+- **Tailwind CSS** + CSS Modules
+- **Framer Motion** para animaciones
+- **Headless UI** + **Heroicons** para componentes de selección
+- **SweetAlert2** para alertas
+- **React Router DOM** para navegación
 
 ## Ejecutar
+
 ```bash
 npm install
 npm run dev
 ```
 
-## Produccion
-Aplicacion desplegada en Vercel:
-
-`https://documentador-topaz.vercel.app/`
-
-## Deploy en Vercel
-- Esta aplicación es compatible con Vercel tal como está hoy.
-- No requiere `static export`.
-- El route handler [`app/api/documentar/route.ts`](./app/api/documentar/route.ts) funcionará en Vercel como función serverless del App Router.
-
-Pasos mínimos:
-1. Importa el repositorio `dienton82/documentador` en Vercel.
-2. Mantén los valores por defecto de framework para Next.js.
-3. Configura las variables de entorno según el modo de uso.
-4. Despliega.
-
-Variables para demo/mock:
+## Build de producción
 
 ```bash
-DOCUMENTADOR_MODE=mock
+npm run build
+npm run preview
 ```
 
-Variables para backend real:
+## Flujo funcional
 
-```bash
-DOCUMENTADOR_MODE=real
-BACKEND_URL=https://your-backend.example.com
-DOCUMENTADOR_BACKEND_TARGET=python
+1. El usuario navega a **Aceleradores** y abre el **Documentador**
+2. Carga un archivo `.xml` (se valida tipo/extensión)
+3. Selecciona una plantilla de documento
+4. Ingresa el nombre del proyecto
+5. Al enviar, se descarga un archivo DOCX con nombre corporativo:
+   `TI – CQ-JiraXXX – Diseño detallado y desarrollo – {NombreProyecto}.docx`
+
+## Mock documental
+
+Esta versión usa un **mock frontend** para la generación del documento:
+
+- El archivo descargado es una plantilla base (`public/placeholder.docx`)
+- No se realiza conversión real de XML a DOCX
+- El nombre del archivo sí se personaliza con el nombre del proyecto ingresado
+- El flujo completo (carga → validación → descarga) es funcional y demostrable
+
+## Estructura
+
+```
+src/
+  main.tsx              # Entry point
+  App.tsx               # Router y layout principal
+  globals.css           # Estilos globales + Tailwind
+  components/           # Componentes de UI
+    Header.tsx          # Cabecera con navegación
+    Hero.tsx            # Hero de la página principal
+    HeroCopy.tsx        # Hero con Documentador integrado
+    Documentador.tsx    # Formulario principal (steps 1-2-3)
+    Sidebar.tsx         # Panel lateral de aceleradores
+    TemplateSelect.tsx  # Selector de plantilla (Headless UI)
+  pages/                # Páginas/vistas
+    Home.tsx
+    Aceleradores.tsx
+  lib/                  # Lógica de negocio
+    alerts.ts           # Alertas con SweetAlert2
+    documentador/
+      constants.ts      # Templates y configuración
+      download.ts       # Utilidad de descarga de blob
+      file-name.ts      # Generación de nombre corporativo
+      service.ts        # Mock: genera descarga desde placeholder
+      types.ts          # Tipos TypeScript
+public/
+  placeholder.docx      # Plantilla base para descarga mock
+  icons/                # Iconos de la UI
+  *.svg                 # SVGs de la interfaz
 ```
 
-O para Express:
+## Preparado para integración real
 
-```bash
-DOCUMENTADOR_MODE=real
-BACKEND_URL=https://your-backend.example.com
-DOCUMENTADOR_BACKEND_TARGET=express
-```
-
-Notas:
-- No uses `BACKEND_URL=http://127.0.0.1:8000` en Vercel.
-- `NEXT_PUBLIC_DOCUMENTADOR_MODE` es opcional; el flujo actual funciona solo con variables server-side.
+El servicio en `src/lib/documentador/service.ts` puede reemplazarse fácilmente por una llamada a un backend real. Solo habría que cambiar `generateDocument()` para hacer un `fetch` a un endpoint que procese el XML y devuelva el DOCX.
 - No hace falta `vercel.json` para este caso.
 
 ## Flujo del documentador

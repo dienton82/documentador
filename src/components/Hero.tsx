@@ -1,4 +1,3 @@
-
 export default function Hero() {
   return (
     <section className="relative h-[40vh] sm:h-[48vh] min-h-[280px] sm:min-h-[360px] w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-card border border-gray-100">
@@ -9,12 +8,12 @@ export default function Hero() {
         <div className="max-w-3xl">
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900">GFT ■</h2>
           <p className="text-2xl sm:text-3xl lg:text-4xl font-light leading-snug text-slate-800 max-w-4xl">
-  Socio global en IA y banca.<br />
-  Creamos impacto real con tecnología y datos.<br />
-  <span className="font-semibold text-slate-900">
-    Transformamos tu negocio con resultados medibles.
-  </span>
-</p>
+            Socio global en IA y banca.<br />
+            Creamos impacto real con tecnología y datos.<br />
+            <span className="font-semibold text-slate-900">
+              Transformamos tu negocio con resultados medibles.
+            </span>
+          </p>
         </div>
       </div>
     </section>

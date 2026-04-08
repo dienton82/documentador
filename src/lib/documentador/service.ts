@@ -1,6 +1,6 @@
 import { buildCorporateDocumentFileName } from "./file-name";
-import { DOCUMENTADOR_ROUTE } from "./constants";
-import { downloadBlobFile, getFilenameFromContentDisposition } from "./download";
+import { DOCX_MIME_TYPE } from "./constants";
+import { downloadBlobFile } from "./download";
 import type { ClientDocumentRequest, ClientDocumentResult } from "./types";
 
 export class DocumentGenerationRequestError extends Error {
@@ -18,43 +18,37 @@ export class DocumentGenerationRequestError extends Error {
 export const isXmlFile = (file: File | null) =>
   !!file && (file.type === "text/xml" || file.name.toLowerCase().endsWith(".xml"));
 
+/**
+ * Genera un documento DOCX mock descargando la plantilla base de public/.
+ * No realiza conversión real de XML a DOCX.
+ * El archivo descargado usa la convención corporativa de nombres.
+ */
 export const generateDocument = async ({
-  file,
+  file: _file,
   projectName,
   templateCode,
 }: ClientDocumentRequest): Promise<ClientDocumentResult> => {
-  const formData = new FormData();
+  // Simula un breve delay para UX realista
+  await new Promise((resolve) => setTimeout(resolve, 600));
 
-  formData.append("xml_file", file, file.name);
-  formData.append("project_name", projectName.trim());
-  formData.append("template_name", templateCode);
-
-  const response = await fetch(DOCUMENTADOR_ROUTE, {
-    method: "POST",
-    body: formData,
-  });
+  const response = await fetch("/placeholder.docx");
 
   if (!response.ok) {
-    const message =
-      (await response.json().catch(() => null))?.message ||
-      "No se pudo generar el documento.";
-
     throw new DocumentGenerationRequestError(
-      message,
+      "No se pudo cargar la plantilla base (placeholder.docx).",
       response.status,
       response.statusText,
     );
   }
 
-  const blob = await response.blob();
-  const filename =
-    getFilenameFromContentDisposition(response.headers.get("content-disposition")) ||
-    buildCorporateDocumentFileName({ projectName, templateCode });
+  const blob = new Blob([await response.arrayBuffer()], { type: DOCX_MIME_TYPE });
 
-  return {
-    blob,
-    filename,
-  };
+  const filename = buildCorporateDocumentFileName({
+    projectName,
+    templateCode,
+  });
+
+  return { blob, filename };
 };
 
 export const downloadGeneratedDocument = (result: ClientDocumentResult) => {

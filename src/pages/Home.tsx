@@ -1,8 +1,7 @@
-"use client";
-import Hero from "@/components/Hero";
-import Link from "next/link";
+import Hero from "../components/Hero";
+import { Link } from "react-router-dom";
 
-export default function Page() {
+export default function Home() {
   return (
     <div className="space-y-4 sm:space-y-6">
       <Hero />
@@ -21,7 +20,7 @@ export default function Page() {
           </div>
 
           <Link
-            href="/aceleradores"
+            to="/aceleradores"
             className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#061224] text-white text-center text-sm sm:text-base hover:opacity-90 transition-opacity"
           >
             Ir a Aceleradores
