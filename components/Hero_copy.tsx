@@ -1,6 +1,7 @@
 import Documentador from "@/components/Documentador";
 import styles from "./Documentador.module.css";
 import { useState } from "react";
+import Image from "next/image";
 
 type HeroCopyProps = {
   showApp: boolean;
@@ -63,13 +64,31 @@ export default function HeroCopy({ showApp, onHide, isHomePage = false }: HeroCo
                 <h2 className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
                   {/* Icon for each step */}
                   {step === 1 && (
-                    <img src="/xls.svg" alt="Nombre del proyecto" className={`w-6 h-6 ${styles.iconAzulSombra}`} />
+                    <Image
+                      src="/xls.svg"
+                      alt="Nombre del proyecto"
+                      width={24}
+                      height={24}
+                      className={styles.iconAzulSombra}
+                    />
                   )}
                   {step === 2 && (
-                    <img src="/plantilla.svg" alt="Plantilla" className={`w-6 h-6 ${styles.iconAzulSombra}`} />
+                    <Image
+                      src="/plantilla.svg"
+                      alt="Plantilla"
+                      width={24}
+                      height={24}
+                      className={styles.iconAzulSombra}
+                    />
                   )}
                   {step === 3 && (
-                    <img src="/Projecto.svg" alt="Archivo XML" className={`w-6 h-6 ${styles.iconAzulSombra}`} />
+                    <Image
+                      src="/Projecto.svg"
+                      alt="Archivo XML"
+                      width={24}
+                      height={24}
+                      className={styles.iconAzulSombra}
+                    />
                   )}
                   <span style={{ color: '#061224' }}>{sectionTitles[step - 1]}</span>
                 </h2>
