@@ -7,6 +7,44 @@ npm install
 npm run dev
 ```
 
+## Deploy en Vercel
+- Esta aplicación es compatible con Vercel tal como está hoy.
+- No requiere `static export`.
+- El route handler [`app/api/documentar/route.ts`](./app/api/documentar/route.ts) funcionará en Vercel como función serverless del App Router.
+
+Pasos mínimos:
+1. Importa el repositorio `dienton82/documentador` en Vercel.
+2. Mantén los valores por defecto de framework para Next.js.
+3. Configura las variables de entorno según el modo de uso.
+4. Despliega.
+
+Variables para demo/mock:
+
+```bash
+DOCUMENTADOR_MODE=mock
+```
+
+Variables para backend real:
+
+```bash
+DOCUMENTADOR_MODE=real
+BACKEND_URL=https://your-backend.example.com
+DOCUMENTADOR_BACKEND_TARGET=python
+```
+
+O para Express:
+
+```bash
+DOCUMENTADOR_MODE=real
+BACKEND_URL=https://your-backend.example.com
+DOCUMENTADOR_BACKEND_TARGET=express
+```
+
+Notas:
+- No uses `BACKEND_URL=http://127.0.0.1:8000` en Vercel.
+- `NEXT_PUBLIC_DOCUMENTADOR_MODE` es opcional; el flujo actual funciona solo con variables server-side.
+- No hace falta `vercel.json` para este caso.
+
 ## Flujo del documentador
 - El usuario selecciona un archivo XML, elige una plantilla y define el nombre del proyecto.
 - El frontend envía el archivo al endpoint local [`app/api/documentar/route.ts`](./app/api/documentar/route.ts).
