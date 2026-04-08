@@ -1,0 +1,8 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": null,
+  "rewrites": [
+    { "source": "/((?!assets/|icons/|.*\\.(?:svg|png|docx|ico)$).*)", "destination": "/index.html" }
+  ]
+}
