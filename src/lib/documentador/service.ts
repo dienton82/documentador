@@ -2,7 +2,7 @@ import { DOCX_MIME_TYPE } from "./constants";
 import { downloadBlobFile } from "./download";
 import type { ClientDocumentRequest, ClientDocumentResult } from "./types";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000").replace(/\/+$/, "");
 
 export class DocumentGenerationRequestError extends Error {
   status: number;
