@@ -16,7 +16,7 @@ export default function Aceleradores() {
             <div className="card-body flex items-center justify-between p-4 sm:p-6">
               <div>
                 <h2 className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-[#3a3b3d]">
-                  <img src="/icons/doc.png" alt="" width={22} height={22} className="h-5 w-auto" />
+                 
                 </h2>
                 <p className="text-sm sm:text-base text-[#5d5e60] mt-1">
                   Haz clic en Documentador para iniciar el flujo documental.

@@ -10,7 +10,7 @@ export default function Home() {
         <div className="card-body flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="flex items-center gap-2 text-lg sm:text-xl font-semibold text-[#3a3b3d]">
-              <img src="/icons/doc.png" alt="" width={24} height={24} className="h-5 sm:h-6 w-auto" />
+             
             </h2>
 
             <p className="mt-2 text-[15px] sm:text-base md:text-lg text-[#5d5e60] leading-relaxed">

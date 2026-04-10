@@ -89,7 +89,7 @@ export default function HeroCopy({ showApp, onHide, isHomePage = false }: HeroCo
                   <span style={{ color: "#5d5e60" }}>{sectionTitles[step - 1]}</span>
                 </h2>
                 <div className="flex items-center gap-3">
-                  <img src="/icons/doc.png" alt="Documentador" width={28} height={28} className="hidden sm:block h-6 sm:h-7 w-auto" />
+                  <img src="/icons/doc.png" alt="Documentador" width={28} height={28} className="hidden sm:block h-6 sm:h-5 w-auto" />
                   {onHide && (
                     <button
                       type="button"

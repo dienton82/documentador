@@ -47,7 +47,7 @@ export default function Sidebar({ onDocumentadorClick }: { onDocumentadorClick?:
         </div>
       </div>
       {open && (
-        <div className="absolute bottom-4 right-4">
+        <div className="absolute bottom-4 sm:bottom-7 right-4">
           <img src="/icons/doc.png" alt="Documentador" width={18} height={18} className="h-4 w-auto" />
         </div>
       )}
