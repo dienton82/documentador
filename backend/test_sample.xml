@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proyecto>
+  <informacion_general>
+    <nombre>Sistema de Facturación</nombre>
+    <version>2.1.0</version>
+    <fecha>2026-04-10</fecha>
+    <responsable>Diego Yagé</responsable>
+  </informacion_general>
+  <modulos>
+    <modulo>
+      <nombre>Extracción de Datos</nombre>
+      <tipo>ETL</tipo>
+      <descripcion>Extrae datos de la base origen y los transforma</descripcion>
+      <estado>Completado</estado>
+    </modulo>
+    <modulo>
+      <nombre>Validación XML</nombre>
+      <tipo>Parsing</tipo>
+      <descripcion>Parsea y valida archivos XML entrantes</descripcion>
+      <estado>En desarrollo</estado>
+    </modulo>
+    <modulo>
+      <nombre>Generación DOCX</nombre>
+      <tipo>Salida</tipo>
+      <descripcion>Genera documentos Word con docxtpl</descripcion>
+      <estado>Planificado</estado>
+    </modulo>
+  </modulos>
+  <tecnologias>
+    <frontend>React + Vite + TypeScript</frontend>
+    <backend>Python + FastAPI</backend>
+    <base_datos>PostgreSQL</base_datos>
+    <despliegue>Vercel + Render</despliegue>
+  </tecnologias>
+</proyecto>
