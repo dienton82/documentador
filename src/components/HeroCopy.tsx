@@ -19,15 +19,7 @@ export default function HeroCopy({ showApp, onHide, isHomePage = false }: HeroCo
 
   return (
     <section className="relative h-auto min-h-[280px] sm:min-h-[360px] w-full overflow-hidden rounded-lg sm:rounded-2xl shadow-card border border-gray-100">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        src="https://cdn.pixabay.com/video/2024/06/20/217626_large.mp4"
-      />
-      <div className="absolute inset-0 bg-white/70" />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100" />
       <div className="relative z-10 w-full px-4 sm:px-6 py-4 sm:py-6 bg-white/9">
         <div className="max-w-6xl mx-auto">
           <div
