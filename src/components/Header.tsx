@@ -29,7 +29,7 @@ function Tab({
     <Link
       to={to}
       onClick={onClick}
-      className="px-2 py-1 text-sm relative text-gray-900 group"
+      className="px-2 py-1 text-sm relative text-[#3a3b3d] group"
     >
       <span>{label}</span>
       {mounted && active && isDesktop && (
@@ -51,15 +51,15 @@ export function Header() {
       <div className="mx-auto max-w-7xl px-3 sm:px-4 h-[var(--header-h)] flex items-center justify-between">
         <div className="flex items-center gap-3 sm:gap-6">
           <img
-            src="https://www.bancodeoccidente.com.co/documents/33634/406709/Banco+de+Occidente.png/a8e7e079-bff9-9a05-7d00-25cac54cad32?version=1.0&t=1747756786004"
-            width={190}
-            height={30}
-            alt="Banco de Occidente"
+            src="/icons/docuement.png"
+            width={32}
+            height={32}
+            alt="Documentador"
             className="h-6 sm:h-8 w-auto object-contain"
           />
           <nav className="hidden sm:flex items-center gap-4 md:gap-6">
             <Tab to="/" label="Home" />
-            <Tab to="/aceleradores" label="Aceleradores" />
+            <Tab to="/aceleradores" label="Panel" />
           </nav>
         </div>
 
@@ -82,7 +82,7 @@ export function Header() {
         <div className="sm:hidden bg-white border-b border-gray-200">
           <nav className="flex flex-col px-4 py-2 gap-2">
             <Tab to="/" label="Home" onClick={() => setMobileMenuOpen(false)} />
-            <Tab to="/aceleradores" label="Aceleradores" onClick={() => setMobileMenuOpen(false)} />
+            <Tab to="/aceleradores" label="Panel" onClick={() => setMobileMenuOpen(false)} />
           </nav>
         </div>
       )}

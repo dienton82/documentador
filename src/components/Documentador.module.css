@@ -1,9 +1,9 @@
-/* Iconos azules con sombra notoria */
+/* Iconos con sombra gris */
 .iconAzulSombra {
-  filter: drop-shadow(0 1px 1px #06122488);
-  color: #061224;
-  fill: #061224;
-  -webkit-filter: drop-shadow(0 1px 1px #06122488);
+  filter: drop-shadow(0 1px 1px #3a3b3d88);
+  color: #5d5e60;
+  fill: #5d5e60;
+  -webkit-filter: drop-shadow(0 1px 1px #3a3b3d88);
 }
 
 .section {

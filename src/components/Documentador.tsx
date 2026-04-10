@@ -93,7 +93,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
               <div className="flex flex-col items-center mb-2">
                 <img src="/icons/cargar-archivo.png" alt="Buscar" width={48} height={48} className={`mb-2 ${styles.iconAzulSombra}`} />
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 text-center mb-2">Arrasque y suelte el archivo aquí o haga clic</p>
+              <p className="text-xs sm:text-sm text-[#5d5e60] text-center mb-2">Arrasque y suelte el archivo aquí o haga clic</p>
               <div className="mt-2 flex flex-col items-center">
                 <input
                   ref={inputRef}
@@ -105,7 +105,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                 <button
                   type="button"
                   onClick={() => inputRef.current?.click()}
-                  className="w-full sm:w-auto mt-2 px-4 py-2 rounded-lg bg-[#061224] text-white hover:opacity-90 text-sm sm:text-base"
+                  className="w-full sm:w-auto mt-2 px-4 py-2 rounded-lg bg-[#5d5e60] text-white hover:bg-[#3a3b3d] text-sm sm:text-base transition-colors"
                 >
                   Cargar Archivo
                 </button>
@@ -116,7 +116,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
         )}
         {step === 2 && (
           <div className={"rounded-xl bg-white/80 backdrop-blur-md p-4 sm:p-6 border border-white/40 shadow-lg " + styles.section}>
-            <label className="text-xs sm:text-sm font-medium text-gray-700">Seleccione Plantilla</label>
+            <label className="text-xs sm:text-sm font-medium text-[#3a3b3d]">Seleccione Plantilla</label>
             <Suspense fallback={<div className="mt-2 text-sm text-gray-400">Cargando...</div>}>
               <TemplateSelect
                 value={template}
@@ -128,9 +128,9 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
               Seleccione la plantilla para generar el documento.
             </p>
             {file && (
-              <p className="mt-2 text-xs sm:text-sm text-gray-600 break-all">
+              <p className="mt-2 text-xs sm:text-sm text-[#5d5e60] break-all">
                 Archivo seleccionado:{" "}
-                <span className="inline-block align-middle rounded px-2 py-0.5 text-[#061224] font-semibold">
+                <span className="inline-block align-middle rounded px-2 py-0.5 text-[#5d5e60] font-semibold">
                   {file.name}
                 </span>
               </p>
@@ -148,10 +148,10 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
         )}
         {step === 3 && (
           <div className={"rounded-xl bg-white/80 backdrop-blur-md p-4 sm:p-6 border border-white/40 shadow-lg " + styles.section}>
-            <label className="text-xs sm:text-sm font-medium text-gray-700">Nombre del Proyecto</label>
+            <label className="text-xs sm:text-sm font-medium text-[#3a3b3d]">Nombre del Proyecto</label>
             <input
               type="text"
-              className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#061224]"
+              className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#5d5e60]"
               placeholder="Escribe el nombre del proyecto"
               value={project}
               onChange={e => setProject(e.target.value)}
@@ -181,7 +181,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                   />
                 </div>
                 <span className={`break-all ${
-                  hasFile && validXML ? "text-gray-700" : "text-gray-600"
+                  hasFile && validXML ? "text-[#3a3b3d]" : "text-[#8a8b8d]"
                 }`}>
                   Archivo cargado: <b>{file?.name || "N/D"}</b>
                 </span>
@@ -201,7 +201,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                   />
                 </div>
                 <span className={`break-all ${
-                  hasFile && validXML && hasTemplate ? "text-gray-700" : "text-gray-600"
+                  hasFile && validXML && hasTemplate ? "text-[#3a3b3d]" : "text-[#8a8b8d]"
                 }`}>
                   Plantilla seleccionada: <b>{template ? getTemplateLabel(template) : "N/D"}</b>
                 </span>
@@ -221,7 +221,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                   />
                 </div>
                 <span className={`break-all ${
-                  hasFile && validXML && hasProject ? "text-gray-700" : "text-gray-600"
+                  hasFile && validXML && hasProject ? "text-[#3a3b3d]" : "text-[#8a8b8d]"
                 }`}>
                   Nombre Proyecto: <b>{project || "N/D"}</b>
                 </span>
@@ -231,7 +231,7 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#061224] text-white disabled:opacity-50 text-sm sm:text-base order-1 sm:order-1"
+                className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#5d5e60] text-white disabled:opacity-50 text-sm sm:text-base order-1 sm:order-1 hover:bg-[#3a3b3d] transition-colors"
               >
                 {loading ? "Procesando..." : "Enviar"}
               </button>

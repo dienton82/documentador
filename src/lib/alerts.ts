@@ -6,7 +6,7 @@ export const showSuccessAlert = async (filename: string) => {
     title: "Descarga Exitosa",
     text: `El documento "${filename}" se ha descargado exitosamente.`,
     showConfirmButton: true,
-    confirmButtonColor: "#061224",
+    confirmButtonColor: "#5d5e60",
     customClass: {
       popup: "shadow-2xl",
     },
@@ -19,7 +19,7 @@ export const showServerError = async (status: number, statusText: string) => {
     title: "No se pudo generar el documento",
     text: `Error del servidor: ${status} ${statusText}`,
     confirmButtonText: "Cerrar",
-    confirmButtonColor: "#061224",
+    confirmButtonColor: "#5d5e60",
     customClass: {
       popup: "shadow-2xl",
     },
@@ -32,7 +32,7 @@ export const showNetworkError = async () => {
     title: "Error de red",
     text: "Verifica tu conexión o intenta nuevamente.",
     confirmButtonText: "Cerrar",
-    confirmButtonColor: "#061224",
+    confirmButtonColor: "#5d5e60",
     customClass: {
       popup: "shadow-2xl",
     },
