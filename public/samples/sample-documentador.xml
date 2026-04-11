@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documentador>
+  <proyecto>
+    <nombre>Automatizacion de Actas</nombre>
+    <codigo>DOC-001</codigo>
+    <responsable>Demo Usuario</responsable>
+    <fecha>2026-04-10</fecha>
+    <descripcion>Proyecto de prueba para validar la carga de XML y la generacion de un documento Word estructurado.</descripcion>
+  </proyecto>
+
+  <requerimientos>
+    <requerimiento>
+      <id>REQ-01</id>
+      <titulo>Cargar archivo XML</titulo>
+      <detalle>El usuario debe poder seleccionar y cargar un archivo XML valido.</detalle>
+      <prioridad>Alta</prioridad>
+    </requerimiento>
+    <requerimiento>
+      <id>REQ-02</id>
+      <titulo>Validar contenido</titulo>
+      <detalle>El sistema debe validar la estructura del XML antes de procesarlo.</detalle>
+      <prioridad>Alta</prioridad>
+    </requerimiento>
+    <requerimiento>
+      <id>REQ-03</id>
+      <titulo>Generar documento Word</titulo>
+      <detalle>El sistema debe crear un archivo DOCX con la informacion organizada.</detalle>
+      <prioridad>Media</prioridad>
+    </requerimiento>
+  </requerimientos>
+
+  <actividades>
+    <actividad>
+      <nombre>Diseno de estructura XML</nombre>
+      <estado>Completado</estado>
+      <responsable>Analista Funcional</responsable>
+    </actividad>
+    <actividad>
+      <nombre>Integracion con backend</nombre>
+      <estado>En progreso</estado>
+      <responsable>Desarrollador Backend</responsable>
+    </actividad>
+    <actividad>
+      <nombre>Prueba de generacion DOCX</nombre>
+      <estado>Pendiente</estado>
+      <responsable>QA</responsable>
+    </actividad>
+  </actividades>
+
+  <observaciones>
+    <observacion>Este archivo se usa como muestra estandar para pruebas funcionales.</observacion>
+    <observacion>La informacion incluida es de demostracion y no contiene datos sensibles.</observacion>
+  </observaciones>
+</documentador>

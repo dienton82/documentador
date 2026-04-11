@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documentador>
+  <encabezado>
+    <titulo>Diseno detallado y desarrollo documental</titulo>
+    <codigo>DOC-PRO-2026-001</codigo>
+    <version>1.0</version>
+    <fechaEmision>2026-04-10</fechaEmision>
+    <estado>En validacion</estado>
+  </encabezado>
+
+  <proyecto>
+    <nombre>Documentador Inteligente</nombre>
+    <cliente>Proyecto Demo Portafolio</cliente>
+    <responsableFuncional>Yeison Alvarez</responsableFuncional>
+    <responsableTecnico>Equipo Desarrollo</responsableTecnico>
+    <descripcion>Solucion orientada a la automatizacion de documentacion a partir de archivos XML, con generacion de documentos Word estructurados para facilitar validacion, seguimiento y presentacion funcional.</descripcion>
+    <objetivo>Validar el flujo completo de carga, procesamiento y generacion documental en una aplicacion moderna construida en React con backend de procesamiento.</objetivo>
+  </proyecto>
+
+  <alcance>
+    <item>Recepcion de archivo XML desde interfaz web.</item>
+    <item>Validacion de estructura y contenido del archivo.</item>
+    <item>Transformacion de datos a una estructura documental comprensible.</item>
+    <item>Generacion automatica de documento Word con secciones organizadas.</item>
+    <item>Descarga directa del documento generado por el usuario final.</item>
+  </alcance>
+
+  <requerimientos>
+    <requerimiento>
+      <id>REQ-001</id>
+      <nombre>Carga de archivo XML</nombre>
+      <descripcion>El sistema debe permitir al usuario seleccionar un archivo XML valido desde su equipo.</descripcion>
+      <prioridad>Alta</prioridad>
+      <criterioAceptacion>El archivo debe cargarse correctamente y habilitar el flujo de procesamiento.</criterioAceptacion>
+    </requerimiento>
+    <requerimiento>
+      <id>REQ-002</id>
+      <nombre>Validacion de estructura</nombre>
+      <descripcion>El sistema debe verificar que el contenido cumpla con una estructura XML soportada.</descripcion>
+      <prioridad>Alta</prioridad>
+      <criterioAceptacion>Si el XML no es valido, se debe informar el error de forma clara.</criterioAceptacion>
+    </requerimiento>
+    <requerimiento>
+      <id>REQ-003</id>
+      <nombre>Generacion de documento Word</nombre>
+      <descripcion>El sistema debe producir un archivo DOCX bien organizado y descargable.</descripcion>
+      <prioridad>Alta</prioridad>
+      <criterioAceptacion>El documento generado debe contener informacion estructurada en secciones y tablas.</criterioAceptacion>
+    </requerimiento>
+    <requerimiento>
+      <id>REQ-004</id>
+      <nombre>Nomenclatura del archivo</nombre>
+      <descripcion>El documento descargado debe generarse con un nombre corporativo y entendible.</descripcion>
+      <prioridad>Media</prioridad>
+      <criterioAceptacion>El nombre del archivo debe incluir referencia al proyecto o al flujo documental.</criterioAceptacion>
+    </requerimiento>
+  </requerimientos>
+
+  <componentes>
+    <componente>
+      <nombre>Frontend Web</nombre>
+      <tecnologia>React + Vite + TypeScript</tecnologia>
+      <descripcion>Interfaz responsable de la carga del XML, validacion basica y descarga del resultado.</descripcion>
+    </componente>
+    <componente>
+      <nombre>Backend de procesamiento</nombre>
+      <tecnologia>FastAPI + Python</tecnologia>
+      <descripcion>Servicio encargado de validar el XML, transformarlo y generar el DOCX final.</descripcion>
+    </componente>
+    <componente>
+      <nombre>Motor documental</nombre>
+      <tecnologia>python-docx</tecnologia>
+      <descripcion>Modulo responsable de construir el documento Word con secciones, titulos y tablas.</descripcion>
+    </componente>
+  </componentes>
+
+  <actividades>
+    <actividad>
+      <id>ACT-01</id>
+      <nombre>Definicion de estructura XML</nombre>
+      <responsable>Analista Funcional</responsable>
+      <estado>Completado</estado>
+      <fechaInicio>2026-04-01</fechaInicio>
+      <fechaFin>2026-04-02</fechaFin>
+    </actividad>
+    <actividad>
+      <id>ACT-02</id>
+      <nombre>Construccion del formulario documental</nombre>
+      <responsable>Frontend Developer</responsable>
+      <estado>Completado</estado>
+      <fechaInicio>2026-04-03</fechaInicio>
+      <fechaFin>2026-04-05</fechaFin>
+    </actividad>
+    <actividad>
+      <id>ACT-03</id>
+      <nombre>Implementacion del parser XML</nombre>
+      <responsable>Backend Developer</responsable>
+      <estado>Completado</estado>
+      <fechaInicio>2026-04-05</fechaInicio>
+      <fechaFin>2026-04-06</fechaFin>
+    </actividad>
+    <actividad>
+      <id>ACT-04</id>
+      <nombre>Generacion del documento Word</nombre>
+      <responsable>Backend Developer</responsable>
+      <estado>En progreso</estado>
+      <fechaInicio>2026-04-07</fechaInicio>
+      <fechaFin>2026-04-11</fechaFin>
+    </actividad>
+    <actividad>
+      <id>ACT-05</id>
+      <nombre>Validacion funcional del flujo</nombre>
+      <responsable>QA</responsable>
+      <estado>Pendiente</estado>
+      <fechaInicio>2026-04-12</fechaInicio>
+      <fechaFin>2026-04-13</fechaFin>
+    </actividad>
+  </actividades>
+
+  <riesgos>
+    <riesgo>
+      <id>R-01</id>
+      <descripcion>Archivos XML con estructuras no contempladas por el parser.</descripcion>
+      <impacto>Alto</impacto>
+      <mitigacion>Definir validaciones y mensajes claros para estructuras no soportadas.</mitigacion>
+    </riesgo>
+    <riesgo>
+      <id>R-02</id>
+      <descripcion>Fallos en generacion del DOCX por campos vacios o inconsistentes.</descripcion>
+      <impacto>Medio</impacto>
+      <mitigacion>Aplicar valores por defecto y saneamiento de datos antes de construir el documento.</mitigacion>
+    </riesgo>
+  </riesgos>
+
+  <observaciones>
+    <observacion>Este archivo XML fue creado como muestra profesional para pruebas funcionales del proyecto Documentador.</observacion>
+    <observacion>No contiene informacion sensible ni datos reales de clientes.</observacion>
+    <observacion>Esta disenado para producir contenido suficiente en el Word generado y evidenciar tablas, bloques y secciones documentales.</observacion>
+  </observaciones>
+
+  <firmas>
+    <firma>
+      <rol>Responsable funcional</rol>
+      <nombre>Yeison Alvarez</nombre>
+    </firma>
+    <firma>
+      <rol>Responsable tecnico</rol>
+      <nombre>Equipo Desarrollo</nombre>
+    </firma>
+  </firmas>
+</documentador>

@@ -111,6 +111,26 @@ export default function Documentador({ onStepChange }: DocumentadorProps) {
                 </button>
                 {file && <p className="text-xs text-gray-500 mt-2 break-all">Archivo: {file.name}</p>}
               </div>
+              <div className="mt-4 pt-3 border-t border-gray-200/60">
+                <p className="text-[10px] sm:text-xs text-[#8a8b8d] text-center mb-1.5">¿No tienes un XML? Prueba con uno de ejemplo:</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3">
+                  <a
+                    href="/samples/sample-documentador.xml"
+                    download="sample-documentador.xml"
+                    className="text-[10px] sm:text-xs text-[#5d5e60] hover:text-[#3a3b3d] underline underline-offset-2 transition-colors"
+                  >
+                    XML Básico
+                  </a>
+                  <span className="hidden sm:inline text-[#8a8b8d]">·</span>
+                  <a
+                    href="/samples/sample-documentador-profesional.xml"
+                    download="sample-documentador-profesional.xml"
+                    className="text-[10px] sm:text-xs text-[#5d5e60] hover:text-[#3a3b3d] underline underline-offset-2 transition-colors"
+                  >
+                    XML Profesional
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         )}
